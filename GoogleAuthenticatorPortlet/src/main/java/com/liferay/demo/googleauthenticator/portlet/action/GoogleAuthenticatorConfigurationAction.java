@@ -63,6 +63,7 @@ public class GoogleAuthenticatorConfigurationAction
 
         String issuer = ParamUtil.getString(actionRequest, "issuer");
         String maxtries = ParamUtil.getString(actionRequest, "maxtries");
+        String starturl = ParamUtil.getString(actionRequest, "starturl");
 
         if (_log.isInfoEnabled()) {
             _log.info("Message Display Configuration: Issuer: " + issuer);
@@ -70,6 +71,7 @@ public class GoogleAuthenticatorConfigurationAction
 
         setPreference(actionRequest, "issuer", issuer);
         setPreference(actionRequest, "maxtries", maxtries);
+        setPreference(actionRequest, "starturl", starturl);
 
         super.processAction(portletConfig, actionRequest, actionResponse);
     }

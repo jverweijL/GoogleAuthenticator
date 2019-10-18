@@ -56,7 +56,7 @@ public class ValidateKeyMVCActionCommand extends BaseMVCActionCommand {
                     themeDisplay.getRequest().getSession().setAttribute("mfa", "validated");
                     user.getExpandoBridge().setAttribute("GoogleAuthenticatorTokenTries",0,false);
                     //TODO make this dynamic/configurable
-                    actionResponse.sendRedirect("http://localhost:8282/group/guest/home");
+                    actionResponse.sendRedirect(preferences.getValue("starturl",_googleAuthenticatorPortletConfiguration.starturl()));
                 } else {
                         attempts += 1;
                         user.getExpandoBridge().setAttribute("GoogleAuthenticatorTokenTries",attempts,false);

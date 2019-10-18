@@ -21,10 +21,12 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
     String issuer = StringPool.BLANK;
     Integer maxtries = 1;
+    String starturl = StringPool.BLANK;
 
     if (Validator.isNotNull(googleAuthenticatorPortletConfiguration)) {
         issuer = portletPreferences.getValue("issuer", googleAuthenticatorPortletConfiguration.issuer());
         maxtries = Integer.parseInt(portletPreferences.getValue("maxtries", googleAuthenticatorPortletConfiguration.maxtries()));
+        starturl = portletPreferences.getValue("starturl", googleAuthenticatorPortletConfiguration.starturl());
     }
 
     Integer attempts = Integer.valueOf(themeDisplay.getUser().getExpandoBridge().getAttribute("GoogleAuthenticatorTokenTries",false).toString());

@@ -54,6 +54,11 @@
 				type="number"
 				value="<%= maxtries %>"
 		/>
+		<aui:input
+				name="starturl"
+				type="text"
+				value="<%= starturl %>"
+		/>
 	</aui:fieldset>
 
 	</aui:fieldset-group>

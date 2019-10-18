@@ -28,4 +28,12 @@ public interface GoogleAuthenticatorPortletConfiguration {
     )
     public String maxtries();
 
+    @Meta.AD(
+            required = false,
+            deflt = "/group/guest/home",
+            name = "starturl",
+            description = "where to redirect on success"
+    )
+    public String starturl();
+
 }
