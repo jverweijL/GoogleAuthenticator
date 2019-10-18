@@ -1,3 +1,5 @@
+![Using MFA with Google Authenticator App!](google-authenticator.gif "Using MFA with Google Authenticator app")
+
 # Setup
 
 in portal-ext.properties set default mfa site for the instance
