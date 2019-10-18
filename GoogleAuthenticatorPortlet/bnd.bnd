@@ -1,0 +1,6 @@
+Bundle-Name: GoogleAuthenticatorPortlet
+Bundle-SymbolicName: com.liferay.demo.googleauthenticator-web
+Bundle-Version: 1.0.0
+Export-Package: com.liferay.demo.googleauthenticator.constants
+
+-metatype: *
