@@ -30,3 +30,8 @@ Once you've done this you can configure custom user fields:
 - Searchable: false
 
 Make sure to give User '*View*' and '*Update*' permissions on both fields.
+
+---
+inspired by:  
+https://github.com/knowarth-technologies/liferay-secure-login
+https://web.liferay.com/marketplace/-/mp/application/97819883

@@ -36,6 +36,8 @@ import java.util.Map;
 
 public class ValidateKeyMVCActionCommand extends BaseMVCActionCommand {
 
+
+
         @Override
         protected void doProcessAction(ActionRequest actionRequest, ActionResponse actionResponse) throws Exception {
 
@@ -52,14 +54,20 @@ public class ValidateKeyMVCActionCommand extends BaseMVCActionCommand {
                 int code = generateNumber(secret,System.currentTimeMillis(),30);
                 int verificationcode = ParamUtil.getInteger(actionRequest, "verificationcode");
 
+                _audit.info(String.format("%s (%s) attempts to login with MFA",user.getFullName(),user.getUserId()));
+
                 if (Integer.compare(code,verificationcode) == 0 && attempts < maxtries) {
+                    _audit.info(String.format("%s (%s) succesfully logged in with MFA",user.getFullName(),user.getUserId()));
                     themeDisplay.getRequest().getSession().setAttribute("mfa", "validated");
                     user.getExpandoBridge().setAttribute("GoogleAuthenticatorTokenTries",0,false);
-                    //TODO make this dynamic/configurable
                     actionResponse.sendRedirect(preferences.getValue("starturl",_googleAuthenticatorPortletConfiguration.starturl()));
                 } else {
                         attempts += 1;
                         user.getExpandoBridge().setAttribute("GoogleAuthenticatorTokenTries",attempts,false);
+                }
+
+                if (attempts >= maxtries) {
+                        _audit.error(String.format("%s (%s) exceeded maximum number of MFA attempts (%s)",user.getFullName(),user.getUserId(),maxtries));
                 }
         }
 
@@ -105,12 +113,13 @@ public class ValidateKeyMVCActionCommand extends BaseMVCActionCommand {
         @Activate
         @Modified
         protected void activate(Map<String, Object> properties) throws PortalException {
-                System.out.println("Hello action");
+                System.out.println(String.format("For auditing you can use %s", _auditPackageName));
                 _googleAuthenticatorPortletConfiguration = ConfigurableUtil.createConfigurable(
                         GoogleAuthenticatorPortletConfiguration.class, properties);
         }
 
         private volatile GoogleAuthenticatorPortletConfiguration _googleAuthenticatorPortletConfiguration;
-
+        private static final String _auditPackageName = ValidateKeyMVCActionCommand.class.getPackage().getName() + ".audit";
         private static final Log _log = LogFactoryUtil.getLog(ValidateKeyMVCActionCommand.class);
+        private static final Log _audit = LogFactoryUtil.getLog(_auditPackageName);
 }
