@@ -15,6 +15,7 @@ To control which users will need to use MFA you can set the following properties
 mfa.include.email=.*@liferay.com
 mfa.include.screenname=klaa.*
 ```
+You can use regex to select email/screenname
 
 Within this default site you must put the mfa portlet on a page.
 
@@ -29,9 +30,9 @@ Once you've done this you can configure custom user fields:
 - Type: Integer (32-bit)
 - Searchable: false
 
-Make sure to give User '*View*' and '*Update*' permissions on both fields.
+**Make sure to give User '*View*' and '*Update*' permissions on both fields!!!**
 
 ---
 inspired by:  
-https://github.com/knowarth-technologies/liferay-secure-login
+https://github.com/knowarth-technologies/liferay-secure-login  
 https://web.liferay.com/marketplace/-/mp/application/97819883
